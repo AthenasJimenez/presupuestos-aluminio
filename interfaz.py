@@ -153,7 +153,11 @@ class Interfaz(QWidget):
         # |--------------------------------------------------------|----------
         # |  OBSERVACIONES            SUBTOTAL  |                  |
         # |-------------------------            -------------------| FORMULARIO
-        # |                        |    IVA     |                  | SUMATORIA
+        # |                        |  DESCUENTO |                  | SUMATORIA
+        # |                        |            -------------------|
+        # |                        |    NETO    |                  |
+        # |                        |            -------------------|
+        # |                        |    IVA     |                  |
         # |                        |            -------------------|
         # |                        |   TOTAL    |                  |
         # ----------------------------------------------------------
@@ -167,6 +171,10 @@ class Interfaz(QWidget):
         self.observaciones_textbox = QLineEdit(self)
         self.subtotal_label = QLabel('SUBTOTAL', self)
         self.subtotal_textbox = QLineEdit(self)
+        self.descuento_label = QLabel('DESCUENTO', self)
+        self.descuento_textbox = QLineEdit(self)
+        self.neto_label = QLabel('NETO', self)
+        self.neto_textbox = QLineEdit(self)
         self.iva_label = QLabel('IVA', self)
         self.iva_textbox = QLineEdit(self)
         self.total_label = QLabel('TOTAL', self)
@@ -177,10 +185,14 @@ class Interfaz(QWidget):
         self.sumatoria_layout.addWidget(self.subtotal_label, 0, 1)
         self.sumatoria_layout.addWidget(self.subtotal_textbox, 0, 2)
         self.sumatoria_layout.addWidget(self.observaciones_textbox, 1, 0)
-        self.sumatoria_layout.addWidget(self.iva_label, 1, 1)
-        self.sumatoria_layout.addWidget(self.iva_textbox, 1, 2)
-        self.sumatoria_layout.addWidget(self.total_label, 2, 1)
-        self.sumatoria_layout.addWidget(self.total_textbox, 2, 2)
+        self.sumatoria_layout.addWidget(self.descuento_label, 1, 1)
+        self.sumatoria_layout.addWidget(self.descuento_textbox, 1, 2)
+        self.sumatoria_layout.addWidget(self.neto_label, 2, 1)
+        self.sumatoria_layout.addWidget(self.neto_textbox, 2, 2)
+        self.sumatoria_layout.addWidget(self.iva_label, 3, 1)
+        self.sumatoria_layout.addWidget(self.iva_textbox, 3, 2)
+        self.sumatoria_layout.addWidget(self.total_label, 4, 1)
+        self.sumatoria_layout.addWidget(self.total_textbox, 4, 2)
  
         # Agregar el layout al grupo
         self.sumatoria_group_box.setLayout(self.sumatoria_layout)
