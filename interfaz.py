@@ -240,5 +240,9 @@ class Interfaz(QWidget):
         self.subtotal_textbox.setText(subtotal_txt)
 
         # Calcular el neto y ponerlo en la caja de texto.
+        neto = Calcular.calcularNeto(self.subtotal_textbox, self.descuento_textbox, self.neto_textbox)
+        neto = round(neto, 2)
+        neto_txt = str(neto)
+        self.neto_textbox.setText(neto_txt)
 
         # Calcular el total y ponerlo en la caja de texto.

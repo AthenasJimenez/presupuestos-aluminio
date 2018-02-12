@@ -14,10 +14,22 @@ class Calcular():
         
         return subtotal
 
-#    def calcularNeto(subtotal, descuento):
-#
-#        # Restar el porcentaje del Descuento al Subtotal. 
-#        print("Calcular neto")
-#
+    def calcularNeto(subtotal_textbox, descuento_textbox, neto_textbox):
+
+        # Restar el porcentaje del Descuento al Subtotal. 
+        subtotal_txt = subtotal_textbox.text()
+        subtotal = float(subtotal_txt)
+        descuento_txt = descuento_textbox.text()
+
+        if descuento_txt:
+            descuento_porcentaje = float(descuento_txt)
+            descuento = subtotal * descuento_porcentaje / 100
+        else:
+            descuento = 0
+
+        neto = subtotal - descuento 
+        return neto
+        
+
 #    def calcularTotal():
 #        print("Calcular total")
