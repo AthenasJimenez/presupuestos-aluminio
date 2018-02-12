@@ -245,4 +245,10 @@ class Interfaz(QWidget):
         neto_txt = str(neto)
         self.neto_textbox.setText(neto_txt)
 
+        # Calcular el IVA y ponerlo en la caja de texto.
+        iva = Calcular.calcularIVA(self.neto_textbox)
+        iva = round(iva, 2)
+        iva_txt = str(iva)
+        self.iva_textbox.setText(iva_txt)
+
         # Calcular el total y ponerlo en la caja de texto.
