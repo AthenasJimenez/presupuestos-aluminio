@@ -1,5 +1,6 @@
 import sys
 from buscar import Buscar
+from calcular import Calcular
 from PyQt5.QtWidgets import *
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import pyqtSlot
@@ -229,3 +230,11 @@ class Interfaz(QWidget):
         self.tabla_material.setItem(contador_tabla, 3, QTableWidgetItem(nombre_txt))
         self.tabla_material.setItem(contador_tabla, 4, QTableWidgetItem(precio_txt))
         self.tabla_material.setItem(contador_tabla, 5, QTableWidgetItem(importe_txt))
+
+        # Calcular subtotal y ponerlo en la caja de texto.
+        subtotal_txt = str(Calcular.calcularSubtotal(self.tabla_material, contador_tabla))
+        self.subtotal_textbox.setText(subtotal_txt)
+
+        # Calcular el neto y ponerlo en la caja de texto.
+
+        # Calcular el total y ponerlo en la caja de texto.
