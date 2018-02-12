@@ -218,8 +218,10 @@ class Interfaz(QWidget):
         # Buscar el precio en la base de datos del material.
         precio_txt = Buscar.buscarPrecio(codigo_txt, nombre_txt, color_txt)
 
-	# Calcular importe
-        importe_txt = str(float(cantidad_txt) * float(precio_txt))
+	# Calcular importe y redondear los decimales.
+        importe = float(cantidad_txt) * float(precio_txt)
+        importe = round(importe, 2)
+        importe_txt = str(importe)
     
         # Agregar material a la tabla.
         contador_tabla = self.tabla_material.rowCount()
@@ -232,7 +234,9 @@ class Interfaz(QWidget):
         self.tabla_material.setItem(contador_tabla, 5, QTableWidgetItem(importe_txt))
 
         # Calcular subtotal y ponerlo en la caja de texto.
-        subtotal_txt = str(Calcular.calcularSubtotal(self.tabla_material, contador_tabla))
+        subtotal = Calcular.calcularSubtotal(self.tabla_material, contador_tabla)
+        subtotal = round(subtotal, 2)
+        subtotal_txt = str(subtotal)
         self.subtotal_textbox.setText(subtotal_txt)
 
         # Calcular el neto y ponerlo en la caja de texto.
