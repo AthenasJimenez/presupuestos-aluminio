@@ -252,3 +252,7 @@ class Interfaz(QWidget):
         self.iva_textbox.setText(iva_txt)
 
         # Calcular el total y ponerlo en la caja de texto.
+        total = Calcular.calcularTotal(self.neto_textbox, self.iva_textbox)
+        total = round(total, 2)
+        total_txt = str(total)
+        self.total_textbox.setText(total_txt)

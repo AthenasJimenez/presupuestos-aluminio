@@ -40,5 +40,14 @@ class Calcular():
         iva = neto * 0.16
         return iva
 
-#    def calcularTotal():
-#        print("Calcular total")
+    def calcularTotal(neto_textbox, iva_textbox):
+
+        # Sumar el valor Neto e IVA.
+        neto_txt = neto_textbox.text()
+        neto = float(neto_txt)
+        iva_txt = iva_textbox.text()
+        iva = float(iva_txt)
+
+        total = neto + iva
+        return total
+
