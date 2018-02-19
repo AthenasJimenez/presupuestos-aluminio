@@ -197,7 +197,16 @@ class Interfaz(QWidget):
  
         # Agregar el layout al grupo
         self.sumatoria_group_box.setLayout(self.sumatoria_layout)
- 
+
+
+    def mensajeError(self, mensaje):
+
+        # Enviar un mensaje de error.
+        ventana_error = QMessageBox()
+        ventana_error.setText(mensaje)
+        ventana_error.setStandardButtons(QMessageBox.Ok)
+        ventana_error.exec_()
+
 
     @pyqtSlot()
     def on_click(self):
@@ -207,52 +216,58 @@ class Interfaz(QWidget):
 
     @pyqtSlot()
     def agregar_on_click(self):
-    
+
         # Obtener los valores escritos en el formulario del material.
         codigo_txt = self.codigo_textbox.text()
         nombre_txt = self.nombre_textbox.text()
         medida_txt = self.medida_textbox.text()
         color_txt = self.color_textbox.text()
         cantidad_txt = self.cantidad_textbox.text()
-    
+
         # Buscar el precio en la base de datos del material.
-        precio_txt = Buscar.buscarPrecio(codigo_txt, nombre_txt, color_txt)
+        precio_txt = Buscar.buscarPrecio(codigo_txt, nombre_txt, color_txt, self.mensajeError)
 
-	# Calcular importe y redondear los decimales.
-        importe = float(cantidad_txt) * float(precio_txt)
-        importe = round(importe, 2)
-        importe_txt = str(importe)
+        if precio_txt:
+
+	    # Calcular importe y redondear los decimales.
+            importe = float(cantidad_txt) * float(precio_txt)
+            importe = round(importe, 2)
+            importe_txt = str(importe)
     
-        # Agregar material a la tabla.
-        contador_tabla = self.tabla_material.rowCount()
-        self.tabla_material.insertRow(contador_tabla)
-        self.tabla_material.setItem(contador_tabla, 0, QTableWidgetItem(cantidad_txt))
-        self.tabla_material.setItem(contador_tabla, 1, QTableWidgetItem(codigo_txt))
-        self.tabla_material.setItem(contador_tabla, 2, QTableWidgetItem(medida_txt))
-        self.tabla_material.setItem(contador_tabla, 3, QTableWidgetItem(nombre_txt))
-        self.tabla_material.setItem(contador_tabla, 4, QTableWidgetItem(precio_txt))
-        self.tabla_material.setItem(contador_tabla, 5, QTableWidgetItem(importe_txt))
+            # Agregar material a la tabla.
+            contador_tabla = self.tabla_material.rowCount()
+            self.tabla_material.insertRow(contador_tabla)
+            self.tabla_material.setItem(contador_tabla, 0, QTableWidgetItem(cantidad_txt))
+            self.tabla_material.setItem(contador_tabla, 1, QTableWidgetItem(codigo_txt))
+            self.tabla_material.setItem(contador_tabla, 2, QTableWidgetItem(medida_txt))
+            self.tabla_material.setItem(contador_tabla, 3, QTableWidgetItem(nombre_txt))
+            self.tabla_material.setItem(contador_tabla, 4, QTableWidgetItem(precio_txt))
+            self.tabla_material.setItem(contador_tabla, 5, QTableWidgetItem(importe_txt))
 
-        # Calcular subtotal y ponerlo en la caja de texto.
-        subtotal = Calcular.calcularSubtotal(self.tabla_material, contador_tabla)
-        subtotal = round(subtotal, 2)
-        subtotal_txt = str(subtotal)
-        self.subtotal_textbox.setText(subtotal_txt)
+            # Calcular subtotal y ponerlo en la caja de texto.
+            subtotal = Calcular.calcularSubtotal(self.tabla_material, contador_tabla)
+            subtotal = round(subtotal, 2)
+            subtotal_txt = str(subtotal)
+            self.subtotal_textbox.setText(subtotal_txt)
 
-        # Calcular el neto y ponerlo en la caja de texto.
-        neto = Calcular.calcularNeto(self.subtotal_textbox, self.descuento_textbox, self.neto_textbox)
-        neto = round(neto, 2)
-        neto_txt = str(neto)
-        self.neto_textbox.setText(neto_txt)
+            # Calcular el neto y ponerlo en la caja de texto.
+            neto = Calcular.calcularNeto(self.subtotal_textbox, self.descuento_textbox, self.neto_textbox)
+            neto = round(neto, 2)
+            neto_txt = str(neto)
+            self.neto_textbox.setText(neto_txt)
 
-        # Calcular el IVA y ponerlo en la caja de texto.
-        iva = Calcular.calcularIVA(self.neto_textbox)
-        iva = round(iva, 2)
-        iva_txt = str(iva)
-        self.iva_textbox.setText(iva_txt)
+            # Calcular el IVA y ponerlo en la caja de texto.
+            iva = Calcular.calcularIVA(self.neto_textbox)
+            iva = round(iva, 2)
+            iva_txt = str(iva)
+            self.iva_textbox.setText(iva_txt)
 
-        # Calcular el total y ponerlo en la caja de texto.
-        total = Calcular.calcularTotal(self.neto_textbox, self.iva_textbox)
-        total = round(total, 2)
-        total_txt = str(total)
-        self.total_textbox.setText(total_txt)
+            # Calcular el total y ponerlo en la caja de texto.
+            total = Calcular.calcularTotal(self.neto_textbox, self.iva_textbox)
+            total = round(total, 2)
+            total_txt = str(total)
+            self.total_textbox.setText(total_txt)
+
+        else:
+            # No se encontro el material en la base de datos.
+            self.mensajeError("No se encontro el material")
