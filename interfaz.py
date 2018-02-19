@@ -172,14 +172,18 @@ class Interfaz(QWidget):
         self.observaciones_textbox = QLineEdit(self)
         self.subtotal_label = QLabel('SUBTOTAL', self)
         self.subtotal_textbox = QLineEdit(self)
+        self.subtotal_textbox.setReadOnly(True)
         self.descuento_label = QLabel('DESCUENTO', self)
         self.descuento_textbox = QLineEdit(self)
         self.neto_label = QLabel('NETO', self)
         self.neto_textbox = QLineEdit(self)
+        self.neto_textbox.setReadOnly(True) 
         self.iva_label = QLabel('IVA', self)
         self.iva_textbox = QLineEdit(self)
+        self.iva_textbox.setReadOnly(True)
         self.total_label = QLabel('TOTAL', self)
         self.total_textbox = QLineEdit(self)
+        self.total_textbox.setReadOnly(True)
        
         # Acomoda todos los elementos etiquetas y cajas de texto.
         self.sumatoria_layout.addWidget(self.observaciones_label, 0, 0)
