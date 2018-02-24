@@ -249,27 +249,19 @@ class Interfaz(QWidget):
             self.tabla_material.setItem(contador_tabla, 5, QTableWidgetItem(importe_txt))
 
             # Calcular subtotal y ponerlo en la caja de texto.
-            subtotal = Calcular.calcularSubtotal(self.tabla_material, contador_tabla)
-            subtotal = round(subtotal, 2)
-            subtotal_txt = str(subtotal)
+            subtotal_txt = Calcular.calcularSubtotal(self.tabla_material, contador_tabla)
             self.subtotal_textbox.setText(subtotal_txt)
 
             # Calcular el neto y ponerlo en la caja de texto.
-            neto = Calcular.calcularNeto(self.subtotal_textbox, self.descuento_textbox, self.neto_textbox)
-            neto = round(neto, 2)
-            neto_txt = str(neto)
+            neto_txt = Calcular.calcularNeto(self.subtotal_textbox, self.descuento_textbox, self.neto_textbox)
             self.neto_textbox.setText(neto_txt)
 
             # Calcular el IVA y ponerlo en la caja de texto.
-            iva = Calcular.calcularIVA(self.neto_textbox)
-            iva = round(iva, 2)
-            iva_txt = str(iva)
+            iva_txt = Calcular.calcularIVA(self.neto_textbox)
             self.iva_textbox.setText(iva_txt)
 
             # Calcular el total y ponerlo en la caja de texto.
-            total = Calcular.calcularTotal(self.neto_textbox, self.iva_textbox)
-            total = round(total, 2)
-            total_txt = str(total)
+            total_txt = Calcular.calcularTotal(self.neto_textbox, self.iva_textbox)
             self.total_textbox.setText(total_txt)
 
         else:
